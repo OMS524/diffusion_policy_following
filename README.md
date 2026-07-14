@@ -1,1 +1,1 @@
-# diffusion-policy-following
+# diffusion_policy_following
