@@ -1,0 +1,22 @@
+/aloha_recorder:
+  ros__parameters:
+    # Where episode bags are written. Each start_recording opens
+    # <save_dir>/[<task_name>/]episode_<unix_sec>/episode_<unix_sec>_0.db3
+    save_dir: "./raw_data"
+    # Optional sub-directory grouping episodes by task. Empty = directly under save_dir.
+    task_name: ""
+    # KEEP_LAST queue depth for every subscription.
+    queue_depth: 100
+    # Auto-stop after exactly this many frames of frame_count_topic (the convert
+    # reference stream). > 0 gives exactly-equal episode lengths and takes
+    # precedence over record_duration. <= 0 disables frame-count mode.
+    record_frames: 240
+    # Reference stream counted by record_frames. This MUST be the convert base
+    # topic (sync_convert_30hz uses /cam_top/image_compressed), so the recorded
+    # frame count equals the resulting HDF5 episode length.
+    frame_count_topic: "/cam_top/image_compressed"
+    # Auto-stop this many seconds after start_recording. <= 0 disables it.
+    # In frame-count mode (record_frames > 0) this is only a SAFETY TIMEOUT that
+    # ends a hung episode if the reference camera stalls (the episode will be
+    # short and should be discarded). Otherwise it is the primary auto-stop.
+    record_duration: 0.0

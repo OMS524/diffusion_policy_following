@@ -1,0 +1,11 @@
+/dp_eef_bridge_node:
+  ros__parameters:
+    # CAN interface names (bring up first with piper_sdk/can_activate.sh).
+    left_can: "can_left"
+    right_can: "can_right"
+    # Publish rate for joint_states / joint_ctrl. The recorder captures every
+    # message; the .db3 -> HDF5 converter resamples to the 30 Hz camera axis.
+    rate_hz: 100.0
+    # Read-only by default. Only set true if joint feedback reads all zeros AND
+    # you have confirmed the 0xFC linkage instruction is safe for your wiring.
+    enable_master_slave_config: false

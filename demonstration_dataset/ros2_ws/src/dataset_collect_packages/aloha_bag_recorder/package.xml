@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>aloha_bag_recorder</name>
+  <version>0.1.0</version>
+  <description>
+    Episode-wise rosbag2 recorder for the airo / Piper ALOHA setup. Records the
+    canonical 9-topic schema (4 compressed cameras, 4 JointState arms, /tf) into
+    per-episode .db3 bags that stay drop-in compatible with the existing
+    aloha_dataset raw_data layout.
+  </description>
+  <maintainer email="vontte21@hanyang.ac.kr">airo</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>tf2_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>rosbag2_py</exec_depend>
+  <exec_depend>ros2launch</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

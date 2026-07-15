@@ -1,0 +1,41 @@
+# RealSense D435i camera mapping for ACT data collection.
+# Each entry is launched as a separate camera_bridge_node instance with the given namespace.
+#
+# `serial` is the librealsense serial number (rs-enumerate-devices). It is the most reliable
+# selector. `usb_port` is the trailing segment of the udev ID_PATH (e.g. "2.4.1") and is used
+# as a fallback when serial is left empty — useful when devices get swapped between sessions.
+#
+# `depth: true` would make a camera stream aligned z16 depth and publish
+# <namespace>/depth_raw (16UC1) + <namespace>/camera_info. Diffusion Policy
+# collection uses RGB only, so depth is disabled for all four cameras. Default
+# is false when the field is omitted (see launch/cameras.launch.py).
+
+cameras:
+  # All four are pinned by librealsense serial (the most reliable selector) so the
+  # mapping survives moving cameras between USB hubs/ports. usb_port is only a
+  # human-readable note of the last-known port, not used when serial is set.
+  - namespace: cam_top
+    serial: "243122070400"
+    usb_port: "6-5.x"
+    depth: false
+  - namespace: cam_left
+    serial: "148522071022"
+    usb_port: "2.4.2"
+    depth: false
+  - namespace: cam_front
+    serial: "243622070741"
+    usb_port: "6-5.x"
+    depth: false
+  - namespace: cam_right
+    serial: "231122070022"
+    usb_port: "2.4.4"
+    depth: false
+
+stream:
+  width: 640
+  height: 480
+  # Capture at the real-robot Diffusion Policy camera rate. The dataset
+  # converter will align these streams to the 10 Hz policy time grid and resize
+  # policy inputs from 640x480 to 320x240.
+  fps: 30
+  jpeg_quality: 90
